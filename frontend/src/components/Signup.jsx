@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 // ✅ FIXED API URL
-const API_URL = 'http://localhost:4000/api';
+// const API_URL = 'http://localhost:4000/api';  
+const API_URL='https://expense-tracker-mern-rc86.onrender.com/api'
 
 
 const Signup = () => {
