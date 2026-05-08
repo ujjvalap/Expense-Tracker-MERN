@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect, useCallback } from "react";
+import { getAuthHeaders } from "../utils/auth.js";
 import { useOutletContext } from "react-router-dom";
 import {
   Plus,
@@ -98,10 +99,11 @@ const ExpensePage = () => {
   });
 
   // Auth headers helper
-  const getAuthHeaders = useCallback(() => {
-    const token = localStorage.getItem("token");
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  }, []);
+  // const getAuthHeaders = useCallback(() => {
+  //   // const token = localStorage.getItem("token");
+  //   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+  //   return token ? { Authorization: `Bearer ${token}` } : {};
+  // }, []);
 
   // Fetch overview (GET /expense/overview?range=...)
   const fetchOverview = useCallback(async (range = timeFrame ?? "monthly") => {

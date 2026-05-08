@@ -33,6 +33,7 @@ import TimeFrameSelector from "../components/TimeFrame";
 import FinancialCard from "../components/FinancialCard";
 import { getTimeFrameRange, generateChartPoints } from "../components/Helper";
 import { INCOME_COLORS, CATEGORY_ICONS_Inc } from "../assets/color";
+import { getAuthHeaders } from "../utils/auth";
 
 
 // const  API_BASE="http://localhost:4000/api";
@@ -204,10 +205,10 @@ const IncomePage = () => {
     date: new Date().toISOString().split("T")[0],
   });
 
-  const getAuthHeaders = useCallback(() => {
-    const token = localStorage.getItem("token");
-    return token ? { Authorization: `Bearer ${token}` } : {};
-  }, []);
+  // const getAuthHeaders = useCallback(() => {
+  //   const token = localStorage.getItem("token");
+  //   return token ? { Authorization: `Bearer ${token}` } : {};
+  // }, []);
 
   const timeFrameRange = useMemo(
     () => getTimeFrameRange(timeFrame, null),

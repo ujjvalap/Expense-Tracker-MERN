@@ -10,6 +10,7 @@ import { Cell, Legend, Pie, ResponsiveContainer, Tooltip, PieChart } from 'recha
 import AddTransactionModal from '../components/Add';
 import { INCOME_CATEGORY_ICONS, EXPENSE_CATEGORY_ICONS } from "../assets/color";
 import { dashboardStyles as styles } from "../assets/dummyStyles";
+import { getAuthHeaders } from "../utils/auth";
 
 const API_BASE=import.meta.env.VITE_API_URL + "/api";
 // const API_BASE="http://localhost:4000/api";
@@ -26,11 +27,11 @@ const COLORS = ["#00C49F", "#FF8042", "#0088FE", "#FFBB28", "#AF19FF"];
 // }
 
 // Fix token issue 
-export const getAuthHeader = () => {
-  const token = localStorage.getItem("token");
+// export const getAuthHeader = () => {
+//   const token = localStorage.getItem("token");
 
-  return token ? { Authorization: `Bearer ${token}` } : {};
-};
+//   return token ? { Authorization: `Bearer ${token}` } : {};
+// };
 
 // to convert date to ISO timeline
 function toIsoWithClientTime(dateValue) {
@@ -238,7 +239,7 @@ const Dashboard = () => {
       try {
         setLoading(true);
         const res=await axios.get(`${API_BASE}/dashboard`,{
-          headers:getAuthHeader(),
+          headers:getAuthHeaders(),
         })
         if(res?.data?.success){
           const data=res.data.data;
@@ -337,11 +338,11 @@ const Dashboard = () => {
       setLoading(true);
       if(newTransaction.type==="income"){
         await axios.post(`${API_BASE}/income/add`,payload,{
-          headers:getAuthHeader()
+          headers:getAuthHeaders()
         })
       } else{
         await axios.post(`${API_BASE}/expense/add`,payload,{
-          headers:getAuthHeader(),
+          headers:getAuthHeaders(),
         })
       }
       await refreshTransactions();

@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 // const API_URL = 'http://localhost:4000/api';
 const API_URL = import.meta.env.VITE_API_URL + "/api";
 
-const Login = () => {
+const Login = ({onLogin}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false)
@@ -31,14 +31,22 @@ const Login = () => {
 
       console.log("LOGIN RESPONSE:", res.data);
 
-      const { token, user } = res.data;
+      // const { token, user } = res.data;
 
-      if (!token) {
-        setError("Login failed: No token received");
-        return;
-      }
-
+      // if (!token) {
+      //   setError("Login failed: No token received");
+      //   return;
+      // }
+const { token, user } = res.data;
+  if (!token) { setError("Login failed: No token received");
+     return; 
+    }
+  
+  onLogin(user, rememberMe, token);
       // ✅ FIXED AUTH STORAGE
+      // localStorage.setItem("token", token);
+      // localStorage.setItem("user", JSON.stringify(user));
+
       localStorage.setItem("token", token);
       localStorage.setItem("user", JSON.stringify(user));
 
