@@ -18,7 +18,8 @@ app.use(cors())
 app.use(cors({
     origin:process.env.FRONTEND_URL,
     // origin:"http://localhost:5173",
-    credentials:true
+    credentials:true,
+    methods: ["GET", "POST", "PUT", "DELETE"]
 }))
 
 // console.log("FRONTEND_URL",process.env.FRONTEND_URL )
